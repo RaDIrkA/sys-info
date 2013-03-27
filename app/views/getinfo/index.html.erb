@@ -7,9 +7,9 @@
 <h2>Memory</h2>
 <table>
   <tr>
-    <th>Total</th>
-    <th>Used</th>
-    <th>Free</th>
+    <th>#Total</th>
+    <th>#Used</th>
+    <th>#Free</th>
   </tr>
   <tr>
     <% @mem_info.each do |i| %>
@@ -20,14 +20,15 @@
 <h2>CPU</h2>
 <table>
   <tr>
-    <th>Uptime</th>
-    <th>Ort. Load(1 Dak.)</th>
-    <th>Ort. Load(5 Dak.)</th>
-    <th>Ort. Load(15 Dak.)</th>
+    <th>#Uptime</th>
+    <th>#Ort. Load(1 Dak.)</th>
+    <th>#Ort. Load(5 Dak.)</th>
+    <th>#Ort. Load(15 Dak.)</th>
   </tr>
   <tr>
+    <td><%= @uptime %></td>
     <% @cpu_info.each do |i| %>
-        <td><%= i %> </td>
+        <td>%<%= (i.to_f*100).to_i %> </td>
     <% end %>  </tr>
 </table>
 </body>
