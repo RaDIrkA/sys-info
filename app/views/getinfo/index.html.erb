@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>System Information</title>
+</head>
+<body>
+<h2>Memory</h2>
+<table>
+  <tr>
+    <th>Total</th>
+    <th>Used</th>
+    <th>Free</th>
+  </tr>
+  <tr>
+    <% @mem_info.each do |i| %>
+    <td><%= i + "MB" %> </td>
+    <% end %>  </tr>
+</table>
+
+<h2>CPU</h2>
+<table>
+  <tr>
+    <th>Uptime</th>
+    <th>Ort. Load(1 Dak.)</th>
+    <th>Ort. Load(5 Dak.)</th>
+    <th>Ort. Load(15 Dak.)</th>
+  </tr>
+  <tr>
+    <% @cpu_info.each do |i| %>
+        <td><%= i %> </td>
+    <% end %>  </tr>
+</table>
+</body>
+</html>
