@@ -4,12 +4,12 @@
   <title>System Information</title>
 </head>
 <body>
-<h2>Memory</h2>
+<h2>RAM</h2>
 <table>
   <tr>
-    <th>#Total</th>
-    <th>#Used</th>
-    <th>#Free</th>
+    <th>#Toplam</th>
+    <th>#Kullanılan</th>
+    <th>#Boş</th>
   </tr>
   <tr>
     <% @mem_info.each do |i| %>
@@ -30,6 +30,26 @@
     <% @cpu_info.each do |i| %>
         <td>%<%= (i.to_f*100).to_i %> </td>
     <% end %>  </tr>
+</table>
+
+<h2>Disk</h2>
+<table>
+  <tr>
+    <th>#Disk</th>
+    <th>#Toplam</th>
+    <th>#Kullanılan</th>
+    <th>#Boş</th>
+    <th>#Oran</th>
+    <th>#Mount</th>
+  </tr>
+    <% @fs.each do |i| %>
+      <tr>
+      <% k = 0
+        i.each do |j|%>
+            <td><%= j %></td>
+        <% end %>
+      </tr>
+    <% end %>
 </table>
 </body>
 </html>

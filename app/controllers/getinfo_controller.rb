@@ -13,6 +13,13 @@ class GetinfoController < ApplicationController
       @cpu_info << @sys_info[8].split(",")[0]
       @cpu_info << @sys_info[9]
     end
+    filesystems = %x(df -h).split("\n")
+    @fs = []
+    filesystems.each do |i|
+      if i.include? "/dev/"
+        @fs << i.split(" ")
+      end
+    end
     render 'index'
   end
 end
