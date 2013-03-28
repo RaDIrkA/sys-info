@@ -39,3 +39,6 @@ nbproject/**/*
 nbproject
 .idea
 .idea/**/*
+.powrc
+.ruby-gemset
+.ruby-version
