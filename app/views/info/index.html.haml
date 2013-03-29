@@ -8,18 +8,6 @@
 -#    - @mem_info.each do |i|
 -#      %td{:style => "text-align: center"}
 -#        = i + "MB"
-%table.table-hover
-  %tr
-    %th
-      %strong RAM
-    %td
-      - ratio = (@mem_info[1].to_f * 100.0 / @mem_info[0].to_f).round.to_s
-      .progress.progress-striped{:style =>"margin-bottom: 0px; width: 290px;"}
-        .bar{:style => "width: #{ratio}%;"}
-          = "%" + ratio
-    %td
-      Toplam: #{@mem_info[0]}MB Kullanılan: #{@mem_info[1]}MB Boşta: #{@mem_info[2]}MB
-
 
 %h2 CPU
 %table{:width => "600px"}
@@ -33,17 +21,43 @@
     - @cpu_info.each do |i|
       %td{:style => "text-align: center"}
         \%#{i}
-%h2 Disk
-%table
+
+%table.table-hover
   %tr
-    %th #Disk
-    %th #Toplam
-    %th #Kullanılan
-    %th #Boş
-    %th #Oran
-    %th #Mount
+    %th{:style => "width: 200px;text-align: right;"}
+      %strong RAM
+    %td
+      - ratio = (@mem_info[1].to_f * 100.0 / @mem_info[0].to_f).round.to_s
+      .progress.progress-striped.active{:style =>"margin-bottom: 0px; width: 290px;"}
+        .bar{:style => "width: #{ratio}%;"}
+          = "%" + ratio
+    %td{:style => "width: 400px;text-align: left;"}
+      Toplam: #{@mem_info[0]}MB Kullanılan: #{@mem_info[1]}MB Boşta: #{@mem_info[2]}MB
+
+-#%h2 Disk
+-#%table
+-#  %tr
+-#    %th #Disk
+-#    %th #Toplam
+-#    %th #Kullanılan
+-#    %th #Boş
+-#    %th #Oran
+-#    %th #Mount
+-#  - @fs.each do |i|
+-#    %tr
+-#      - k = 0
+-#      - i.each do |j|
+-#        %td{:style => "text-align: center"}= j
+
+%table.table-hover
   - @fs.each do |i|
     %tr
-      - k = 0
-      - i.each do |j|
-        %td{:style => "text-align: center"}= j
+      %th{:style => "width: 200px;text-align: right;"}
+        %strong Disk: #{i[0]}
+      %td
+        - ratio = (@mem_info[2].to_f * 100.0 / @mem_info[1].to_f).round.to_s
+        .progress.progress-striped.active{:style =>"margin-bottom: 0px; width: 290px;"}
+          .bar{:style => "width: #{ratio}%;"}
+            = "%" + ratio
+      %td{:style => "width: 400px;text-align: left;"}
+        Toplam: #{i[1]}MB Kullanılan: #{i[2]}MB Boşta: #{i[3]}MB
