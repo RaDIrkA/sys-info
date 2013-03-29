@@ -1,0 +1,80 @@
+<div class="navbar navbar-inverse navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="brand" href="#">Project name</a>
+      <div class="nav-collapse collapse">
+        <ul class="nav">
+          <li class="active"><a href="#">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div><!--/.nav-collapse -->
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+  <h1>Bootstrap starter template</h1>
+  <p>Use this document as a way to quick start any new project.<br> All you get is this message and a barebones HTML document.</p>
+
+</div>
+
+
+
+
+<div class="progress progress-striped active">
+  <div class="bar" style="width: 40%;"></div>
+</div>
+<h2>RAM</h2>
+<table>
+  <tr>
+    <th>#Toplam</th>
+    <th>#Kullanılan</th>
+    <th>#Boş</th>
+  </tr>
+  <tr>
+    <% @mem_info.each do |i| %>
+    <td style="text-align: center"><%= i + "MB" %> </td>
+    <% end %>  </tr>
+</table>
+
+<h2>CPU</h2>
+<table width="600px">
+  <tr>
+    <th>#Uptime</th>
+    <th>#Ort. Load(1 Dak.)</th>
+    <th>#Ort. Load(5 Dak.)</th>
+    <th>#Ort. Load(15 Dak.)</th>
+  </tr>
+  <tr>
+    <td style="text-align: center"><%= @uptime %></td>
+    <% @cpu_info.each do |i| %>
+        <td style="text-align: center" >%<%= i %> </td>
+    <% end %>  </tr>
+</table>
+
+<h2>Disk</h2>
+<table>
+  <tr>
+    <th>#Disk</th>
+    <th>#Toplam</th>
+    <th>#Kullanılan</th>
+    <th>#Boş</th>
+    <th>#Oran</th>
+    <th>#Mount</th>
+  </tr>
+    <% @fs.each do |i| %>
+      <tr>
+      <% k = 0
+        i.each do |j|%>
+            <td style="text-align: center"><%= j %></td>
+        <% end %>
+      </tr>
+    <% end %>
+</table>
