@@ -13,12 +13,12 @@
   </tr>
   <tr>
     <% @mem_info.each do |i| %>
-    <td><%= i + "MB" %> </td>
+    <td style="text-align: center"><%= i + "MB" %> </td>
     <% end %>  </tr>
 </table>
 
 <h2>CPU</h2>
-<table>
+<table width="600px">
   <tr>
     <th>#Uptime</th>
     <th>#Ort. Load(1 Dak.)</th>
@@ -26,9 +26,9 @@
     <th>#Ort. Load(15 Dak.)</th>
   </tr>
   <tr>
-    <td><%= @uptime %></td>
+    <td style="text-align: center"><%= @uptime %></td>
     <% @cpu_info.each do |i| %>
-        <td>%<%= i %> </td>
+        <td style="text-align: center" >%<%= i %> </td>
     <% end %>  </tr>
 </table>
 
@@ -46,7 +46,7 @@
       <tr>
       <% k = 0
         i.each do |j|%>
-            <td><%= j %></td>
+            <td style="text-align: center"><%= j %></td>
         <% end %>
       </tr>
     <% end %>
