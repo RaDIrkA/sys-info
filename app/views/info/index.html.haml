@@ -9,28 +9,62 @@
 -#      %td{:style => "text-align: center"}
 -#        = i + "MB"
 
-%h2 CPU
-%table{:width => "600px"}
-  %tr
-    %th #Uptime
-    %th #Ort. Load(1 Dak.)
-    %th #Ort. Load(5 Dak.)
-    %th #Ort. Load(15 Dak.)
-  %tr
-    %td{:style => "text-align: center"}= @uptime
-    - @cpu_info.each do |i|
-      %td{:style => "text-align: center"}
-        \%#{i}
+-#%h2 CPU
+-#%table{:width => "600px"}
+-#  %tr
+-#    %th #Uptime
+-#    %th #Ort. Load(1 Dak.)
+-#    %th #Ort. Load(5 Dak.)
+-#    %th #Ort. Load(15 Dak.)
+-#  %tr
+-#    %td{:style => "text-align: center"}= @uptime
+-#    - @cpu_info.each do |i|
+-#      %td{:style => "text-align: center"}
+-#        \%#{i}
+
+-#:javascript
+-#  $(function(){
+-#  	$('#test').speedometer();
+-#  	$('.changeSpeedometer').click(function(){
+-#  		$('#test').speedometer({ percentage: $('.speedometer').val() || 0 });
+-#  	});
+-#  });
+-##test
+-#  #{@cpu_info[0].round < 100 ? @cpu_info[0].round : 100 }
+
+- @mem_ratio = (@mem_info[1].to_f * 100.0 / @mem_info[0].to_f).round.to_s
+%script{:src => "https://www.google.com/jsapi", :type => "text/javascript"}
+:javascript
+  google.load('visualization', '1', {packages:['gauge']});
+  google.setOnLoadCallback(drawChart);
+  function drawChart() {
+    var data = google.visualization.arrayToDataTable([
+      ['Label', 'Value'],
+      ['CPU', #{@cpu_info[0]}],
+      ['Memory', #{@mem_ratio}]
+    ]);
+
+    var options = {
+      width: 400, height: 120,
+      greenFrom:0, greenTo: 60,
+      redFrom: 90, redTo: 100,
+      yellowFrom:60, yellowTo: 90,
+      minorTicks: 5
+    };
+
+    var chart = new google.visualization.Gauge(document.getElementById('chart_div'));
+    chart.draw(data, options);
+  }
+#chart_div{:align => "center" }
 
 %table.table-hover
   %tr
     %th{:style => "width: 200px;text-align: right;"}
       %strong RAM
     %td
-      - ratio = (@mem_info[1].to_f * 100.0 / @mem_info[0].to_f).round.to_s
       .progress.progress-striped.active{:style =>"margin-bottom: 0px; width: 290px;"}
-        .bar{:style => "width: #{ratio}%;"}
-          = "%" + ratio
+        .bar{:style => "width: #{@mem_ratio}%;"}
+          = "%" + @mem_ratio
     %td{:style => "width: 400px;text-align: left;"}
       Toplam: #{@mem_info[0]}MB Kullanılan: #{@mem_info[1]}MB Boşta: #{@mem_info[2]}MB
 
@@ -55,9 +89,10 @@
       %th{:style => "width: 200px;text-align: right;"}
         %strong Disk: #{i[0]}
       %td
-        - ratio = (@mem_info[2].to_f * 100.0 / @mem_info[1].to_f).round.to_s
+        - ratio = (i[2].to_f * 100.0 / i[1].to_f).round.to_s
         .progress.progress-striped.active{:style =>"margin-bottom: 0px; width: 290px;"}
           .bar{:style => "width: #{ratio}%;"}
             = "%" + ratio
       %td{:style => "width: 400px;text-align: left;"}
-        Toplam: #{i[1]}MB Kullanılan: #{i[2]}MB Boşta: #{i[3]}MB
+        Toplam: #{i[1]}B Kullanılan: #{i[2]}B Boşta: #{i[3]}B
+

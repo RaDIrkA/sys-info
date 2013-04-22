@@ -1,0 +1,18 @@
+	<script>
+
+		$(function(){
+			$('#test').speedometer();
+
+			$('.changeSpeedometer').click(function(){
+				$('#test').speedometer({ percentage: $('.speedometer').val() || 0 });
+			});
+
+		});
+	</script>
+		<input type="text" class="speedometer" value="90">Enput</input>
+		<button class="changeSpeedometer">Submit</button><br/>
+
+
+		<div id="test">
+		90
+		</div>

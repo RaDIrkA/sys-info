@@ -5,12 +5,14 @@ class InfoController < ApplicationController
     if RUBY_PLATFORM =~ /linux/i
       @mem_info = %x(free -m).split("\n")[1].split(" ")[1..3]
       @sys_info = %x(uptime).split(",")
-      @cpu_info = []
-      number_of_cores = %x(cat /proc/cpuinfo).scan(/processor/).size
       @uptime = @sys_info[0]
-      @cpu_info << @sys_info[2].split(" ")[2].to_f * 100 / number_of_cores
-      @cpu_info << @sys_info[3].split(" ")[0].to_f * 100 / number_of_cores
-      @cpu_info << @sys_info[4].split(" ")[0].to_f * 100 / number_of_cores
+      cpu_info = %x(cat /proc/loadavg).split(" ")[0..2]
+      number_of_cores = %x(cat /proc/cpuinfo).scan(/processor/).size
+      @cpu_info = []
+      cpu_info.each {|i| @cpu_info << (i.to_f * 100 / number_of_cores) % 100}
+      #@cpu_info << @sys_info[2].split(" ")[2].to_f * 100 / number_of_cores
+      #@cpu_info << @sys_info[3].split(" ")[0].to_f * 100 / number_of_cores
+      #@cpu_info << @sys_info[4].split(" ")[0].to_f * 100 / number_of_cores
       filesystems = %x(df -h).split("\n")
       @fs = []
       filesystems.each do |i|
@@ -20,8 +22,12 @@ class InfoController < ApplicationController
       end
       render 'index'
     else
-      # FIXED ME
+      # FIX ME
       raise Exception
     end
+  end
+
+  def smeter
+    render 'example.html'
   end
 end
