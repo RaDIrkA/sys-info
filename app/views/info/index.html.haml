@@ -66,8 +66,8 @@
         .bar{:style => "width: #{@mem_ratio}%;"}
           = "%" + @mem_ratio
     %td{:style => "width: 400px;text-align: left;"}
-      Toplam: #{@mem_info[0]}MB Kullanılan: #{@mem_info[1]}MB Boşta: #{@mem_info[2]}MB
-
+      Toplam: #{@mem_info[0].to_i < 1000 ? @mem_info[0].to_s + "MB" : (@mem_info[0].to_i.round(-3) / 1000).to_s + "GB"} Kullanılan: #{@mem_info[1].to_i < 1000 ? @mem_info[1].to_s + "MB" : (@mem_info[1].to_i.round(-3) / 1000).to_s + "GB"} Boşta: #{@mem_info[2].to_i < 1000 ? @mem_info[2].to_s + "MB" : (@mem_info[2].to_i.round(-3) / 1000).to_s + "GB"}
+-#      = @mem_info[0].to_i.to_s + "  " + @mem_info[0].to_i.round.to_s + "  " + (@mem_info[0].to_i.round / 1024).to_s
 -#%h2 Disk
 -#%table
 -#  %tr
