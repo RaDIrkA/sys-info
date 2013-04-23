@@ -9,7 +9,7 @@ class InfoController < ApplicationController
       cpu_info = %x(cat /proc/loadavg).split(" ")[0..2]
       number_of_cores = %x(cat /proc/cpuinfo).scan(/processor/).size
       @cpu_info = []
-      cpu_info.each {|i| @cpu_info << (i.to_f * 100 / number_of_cores) % 100}
+      cpu_info.each {|i| @cpu_info << ((i.to_f * 100 / number_of_cores) % 100).round}
       #@cpu_info << @sys_info[2].split(" ")[2].to_f * 100 / number_of_cores
       #@cpu_info << @sys_info[3].split(" ")[0].to_f * 100 / number_of_cores
       #@cpu_info << @sys_info[4].split(" ")[0].to_f * 100 / number_of_cores
