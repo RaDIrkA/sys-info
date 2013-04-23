@@ -46,9 +46,9 @@
 
     var options = {
       width: 500, height: 150,
-      greenFrom:0, greenTo: 60,
-      redFrom: 90, redTo: 100,
-      yellowFrom:60, yellowTo: 90,
+      greenFrom:0, greenTo: 50,
+      redFrom: 75, redTo: 100,
+      yellowFrom:50, yellowTo: 75,
       minorTicks: 5
     };
 
@@ -66,7 +66,7 @@
         .bar{:style => "width: #{@mem_ratio}%;"}
           = "%" + @mem_ratio
     %td{:style => "width: 400px;text-align: left;"}
-      Toplam: #{@mem_info[0].to_i < 1000 ? @mem_info[0].to_s + "MB" : (@mem_info[0].to_i.round(-3) / 1000).to_s + "GB"} Kullanılan: #{@mem_info[1].to_i < 1000 ? @mem_info[1].to_s + "MB" : (@mem_info[1].to_i.round(-3) / 1000).to_s + "GB"} Boşta: #{@mem_info[2].to_i < 1000 ? @mem_info[2].to_s + "MB" : (@mem_info[2].to_i.round(-3) / 1000).to_s + "GB"}
+      Toplam: #{@mem_info[0].to_i < 1024 ? @mem_info[0].to_s + "MB" : (@mem_info[0].to_f / 1024).round(1).to_s + "GB"} Kullanılan: #{@mem_info[1].to_i < 1024 ? @mem_info[1].to_s + "MB" : (@mem_info[1].to_f / 1024).round(1).to_s + "GB"} Boşta: #{@mem_info[2].to_i < 1024 ? @mem_info[2].to_s + "MB" : (@mem_info[2].to_f / 1024).round(1).to_s + "GB"}
 -#      = @mem_info[0].to_i.to_s + "  " + @mem_info[0].to_i.round.to_s + "  " + (@mem_info[0].to_i.round / 1024).to_s
 -#%h2 Disk
 -#%table
